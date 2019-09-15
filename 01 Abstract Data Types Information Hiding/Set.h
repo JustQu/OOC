@@ -8,7 +8,8 @@ extern const void *Set;
 
 /*
 add() takes an element, adds it to a set, and returns
-whatever was added or already present in the set
+whatever was added or 
+already present in the set
 */
 void 	*add(void *set, const void *element);
 
