@@ -30,7 +30,7 @@ $(NAME): $(OBJS)
 	$(CC) $(LDFLAGS) $(OBJS) -o $(NAME)
 
 $(OBJS): $(OBJSDIR)%.o: $(SRCSDIR)%.c
-	$(CC) $(CFLAGS) -c $(SRCSDIR)$< -o $(OBJSDIR)$*.o
+	$(CC) $(CFLAGS) -c $(SRCSDIR)$< -o $(OBJSDIR)$(<:.c=.o)
 
 $(OBJS): $(INCS)
 
