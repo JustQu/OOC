@@ -1,5 +1,6 @@
+#ifndef CLASS_H
+#define CLASS_H
 #include "stdio.h"
-
 
 /*
 Each of our objects starts with a pointer to its own type description, and through
@@ -20,14 +21,4 @@ struct Class
     int     *(*differ)(const void *self, const void *b);
 };
 
-struct  String
-{
-    const void  *class; /* must be first */
-    char        *text;
-};
-
-struct Set
-{
-    const void  *class; /* musst be first */
-    /* ... */
-};
+#endif
