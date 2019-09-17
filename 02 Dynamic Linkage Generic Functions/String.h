@@ -1,8 +1,6 @@
-#include "stdlib.h"
+#ifndef STRING_H
+#define STRING_H
 
 extern const void   *String;
 
-void    *clone(const void *self);
-int     differ(const void *self, const void *b);
-
-
+#endif

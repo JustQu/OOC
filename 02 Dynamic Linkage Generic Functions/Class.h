@@ -1,6 +1,7 @@
 #ifndef CLASS_H
 #define CLASS_H
-#include "stdio.h"
+
+#include "stdarg.h"
 
 /*
 Each of our objects starts with a pointer to its own type description, and through
