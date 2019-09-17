@@ -1,5 +1,8 @@
+#include "assert.h"
+#include "stdlib.h"
+
 #include "new.h"
-#include "Class.h"
+#include "new.r"
 
 void    *new(const void *_class, ...)
 {
@@ -29,6 +32,14 @@ void    delete(void    *self)
     if (self &&  *cp && (*cp)->dtor)
         self = (*cp)->dtor(self);
     free(self);
+}
+
+void    *clone(const void     *self)
+{
+    const struct Class *const *cp = self;
+
+    assert(self && *cp && (*cp)->clone);
+    return ((*cp)->clone(self));
 }
 
 int     differ(const void *self, const void *b)

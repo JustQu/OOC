@@ -9,10 +9,11 @@ ok
 */
 int     main()
 {
-    void    *a = new(String, "a"), *aa = clone(a);
+    void    *a = new(String, "a");
+    void    *aa = clone(a);
     void    *b = new(String, "b");
 
-    printf("sizeOf(a) ==  %u\n", sizeOf(a));
+    printf("sizeOf(a) ==  %zu\n", sizeOf(a));
 
     if (differ(a, b))
         puts("ok");
