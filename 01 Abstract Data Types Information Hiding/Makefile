@@ -27,10 +27,10 @@ NAME	=	a.out
 all: $(NAME)
 
 $(NAME): $(OBJS) 
-	$(CC) $(LDFLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(LDFLAGS) $^ -o $@
 
 $(OBJS): $(OBJSDIR)%.o: $(SRCSDIR)%.c
-	$(CC) $(CFLAGS) -c $(SRCSDIR)$< -o $(OBJSDIR)$(<:.c=.o)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJS): $(INCS)
 
