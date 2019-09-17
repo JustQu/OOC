@@ -1,21 +1,8 @@
 #include "stdlib.h"
 
-struct type
-{
-    size_t  size;               /* size of an object */
-    void    (*dtor)(void *);    /* destructor */
-};
+extern const void   *String;
 
-struct string
-{
-    char        *text;      /* dynamic string */
-    const void  *destroy;   /* locate destructor */
-};
-
-struct Set
-{
-    /* information */
-    const void  *destroy;   /* locate destructor */
-};
+void    *clone(const void *self);
+int     differ(const void *self, const void *b);
 
 
