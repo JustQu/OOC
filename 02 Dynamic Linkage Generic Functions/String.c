@@ -54,7 +54,7 @@ static int  String_differ(const void *_self, const void *_b)
 }
 
 static const struct Class _String = {
-    .size = sizeof(struct Class),
+    .size = sizeof(struct String),
     .ctor = String_ctor,
     .dtor = String_dtor,
     .clone = String_clone,

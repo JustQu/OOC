@@ -23,7 +23,7 @@ int     main()
 
     if (a == aa)
         puts("clone?");
-    
+
     delete(a), delete(aa), delete(b);
     return 0;
 }
