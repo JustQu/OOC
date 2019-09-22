@@ -12,7 +12,7 @@ CFLAGS	=	-I$(INCSDIR)\
 			-pedantic
 
 #linker flags
-LDLIBS = 
+LDLIBS =
 
 LDFLAGS	= -L ./
 
@@ -35,8 +35,9 @@ INCSDIR	=	./
 INCS	=	new.h new.r
 INCS	:=	$(addprefix $(INCSDIR), $(INCS))
 
-ATOM_INCS = String.h
 ATOM_INCSDIR = ./
+ATOM_INCS = String.h
+ATOM_INCS := $(addprefix $(ATOM_INCSDIR), $(ATOM_INCS))
 
 STRING_INCS = String.h
 STRING_INCSDIR = ./
@@ -44,14 +45,14 @@ STRING_INCSDIR = ./
 #--------------------------------------------------------------------------------
 #object fiiles and their directory
 #--------------------------------------------------------------------------------
-OBJSDIR	=	./
+OBJSDIR	=	./objs/
 OBJS	=	$(addprefix $(OBJSDIR), $(SRCS:.c=.o))
 
-ATOM_OBJS = $(ATOM_SRCS:.c=.o)
-ATOM_OBJSDIR = ./
+ATOM_OBJSDIR = $(OBJSDIR)atom_objs/
+ATOM_OBJS = $(addprefix $(ATOM_OBJSDIR), $(ATOM_SRCS:.c=.o))
 
-STRING_OBJS = $(STRING_SRCS:.c=.o)
-STRING_OBJSDIR = ./
+STRING_OBJSDIR =  $(OBJSDIR)string_objs/
+STRING_OBJS = $(addprefix $(STRING_OBJSDIR), $(STRING_SRCS:.c=.o))
 
 #--------------------------------------------------------------------------------
 #name of executable
@@ -69,19 +70,19 @@ $(STRING): $(OBJS) $(STRING_OBJS)
 	$(CC) $(LDLIBS) $(LDFLAGS) $^ -o $@
 
 $(OBJS): $(OBJSDIR)%.o: $(SRCSDIR)%.c | $(OBJSDIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(OBJS): $(INCS)
 
-$(ATOM_OBJS): $(ATOM_OBJSDIR)%.c: $(ATOM_SRCSDIR)%.c | $(ATOM_OBJSDIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+$(ATOM_OBJS): $(ATOM_OBJSDIR)%.o: $(ATOM_SRCSDIR)%.c | $(ATOM_OBJSDIR)
+	$(CC) $(CFLAGS) -c -o $@ $<  
 
-$(ATOM_OBJS): $(ATOM_INCS) $(INCS)
+$(STRING_OBJS): $(ATOM_INCS) $(INCS)
 
-$(STRING_OBJS): $(STRING_OBJSDIR)%.c: $(STRING_SRCSDIR)%.c | $(STRING_OBJSDIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+$(STRING_OBJS): $(STRING_OBJSDIR)%.o: $(STRING_SRCSDIR)%.c | $(STRING_OBJSDIR)
+	$(CC) $(CFLAGS) -c -o $@ $<
 
-$(STRING_OBJS): $(STRING_OBJS) $(INCS)
+$(STRING_OBJS): $(STRING_INCS) $(INCS)
 
 $(OBJSDIR):
 	mkdir $@
@@ -94,11 +95,11 @@ $(STRING_OBJSDIR):
 
 .PHONY: clean
 clean:
-	-$(RM) $(OBJS)
+	-$(RM) $(OBJS) $(ATOM_OBJS) $(STRING_OBJS)
 
 .PHONY: fclean
 fclean: clean
-	-$(RM) $(NAME)
+	-$(RM) $(ATOM) $(STRING)
 
 .PHONY: re
 re: fclean all
