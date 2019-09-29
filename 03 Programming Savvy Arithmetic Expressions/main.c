@@ -7,6 +7,7 @@
 #include <string.h>
 
 #include "parse.h"	/* defines NUMBER */
+#include "value.h"
 
 static enum tokens	token;	/* current input symbol */
 static double		number; /* if NUMBER: numerical value */
@@ -34,21 +35,92 @@ static enum tokens	scan(const char *buf)	/* return token = next input symbol */
 	return token;
 }
 
+static void	*sum(void);
+
+/*
+** factor: +factor
+**					-factor
+**					NUMBER
+**					( sum )
+*/
+
+static void	*factor(void)
+{
+	void	*result;
+
+	switch ((int)token)
+	{
+		case '+':
+			scan(0);
+			return factor();
+		case '-':
+			scan(0);
+			return (new(Minus, factor()));
+		default:
+			error("bad factor: '%c' 0x%x", token, token);
+		case NUMBER:
+			result = new(Value, number);
+			break;
+		case '(':
+			scan(0);
+			result = sum();
+			if (token != ')')
+				error("expecting )");
+	}
+	scan(0);
+	return result;
+}
+
+/*
+** product: factor { *|/ factor }...
+*/
+
+static void *product(void)
+{
+	void		*result = factor();
+	const void	*type;
+
+	for (;;)
+	{
+		switch((int)token)
+		{
+			case '*':
+				type = Mult;
+				break;
+			case '/':
+				type = Div;
+				break;
+			default:
+				return (result);
+		}
+		scan(0);
+		result = new(type, result, factor());
+	}
+}
+
 /*
 ** sum : product { +|— product }...
 */
-void	sum(void)
+static void	*sum(void)
 {
-	product();
+	void		*result = product();
+	const void	*type;
+
 	for(;;)
 	{
-		switch(token)
+		switch((int)token)
 		{
 			case '+':
+				type = Add;
+				break;
 			case '-':
-				scan(0), product(); continue;
+				type = Sub;
+				break;
+			default:
+				return result;
 		}
-		return;
+		scan(0);
+		result = new(type, result, product());
 	}
 }
 
