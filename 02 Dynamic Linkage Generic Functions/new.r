@@ -2,6 +2,7 @@
 #define CLASS_H
 
 #include "stdarg.h"
+#include "stddef.h"
 
 /*
 **private header
