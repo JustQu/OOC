@@ -128,7 +128,7 @@ static double	doVal(const void *tree)
 	return ((struct Val *)tree)->value;
 }
 
-static struct Type	_Value = {"", mkVal, doVal, free};
+static struct Type	_Value = {mkVal, doVal, free};
 
 const void  *Value = &_Value;
 
