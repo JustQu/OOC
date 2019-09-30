@@ -9,7 +9,7 @@
 
 struct String
 {
-    const void *class; /* must be first */
+    const void	*class; /* must be first */
     char        *text;
 };
 
