@@ -124,11 +124,15 @@ static void	*sum(void)
 
 static jmp_buf	onError;
 
+#include <stdint.h>
+
 int		main(void)
 {
 	volatile int	errors = 0;
 	char			buf[BUFSIZ];
 
+	size_t g;
+	printf("%u", SIZE_MAX);
 	if (setjmp(onError))
 		++errors;
 
