@@ -9,7 +9,7 @@ int main(int argc, char **argv)
 	{
 		switch (**argv)
 		{
-			case 'p';
+			case 'p':
 				p = new(Point, 1, 2);
 				break;
 			default:
