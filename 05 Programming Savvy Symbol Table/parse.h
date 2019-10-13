@@ -3,8 +3,9 @@
 
 enum tokens				
 {
-	NUMBER = '8',	/* literal constant */
-	VAR = 'V',	/* variable */
+	NUMBER = 'n',	/* literal constant */
+	VAR = 'v',		/* variable */
+	LET = 'l',	
 };
 
 void	error(const char *fmt, ...);

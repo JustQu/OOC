@@ -8,6 +8,7 @@
 
 #include "parse.h"	/* defines NUMBER */
 #include "value.h"
+#include "Name.h"
 
 #define ALNUM	"ABCDEFGHIJKLMNOPQRSTUVWXYZ"\
 				"abcdefghijklmnopqrstuvwxyz"\
@@ -15,7 +16,8 @@
 
 static enum tokens	token;	/* current input symbol */
 static double		number; /* if NUMBER: numerical value */
-static void			*symbol;	/* symbol */
+
+static void	*sum(void);
 
 static enum tokens	scan(const char *buf)	/* return token = next input symbol */
 {
@@ -48,6 +50,11 @@ static enum tokens	scan(const char *buf)	/* return token = next input symbol */
 	return token;
 }
 
+/*
+** stmt : sum
+** 		| LET VAR = sum
+*/
+
 static void	*stmt(void)
 {
 	void	*result;
@@ -66,8 +73,6 @@ static void	*stmt(void)
 			return sum();
 	}
 }
-
-static void	*sum(void);
 
 /*
 ** factor: +factor

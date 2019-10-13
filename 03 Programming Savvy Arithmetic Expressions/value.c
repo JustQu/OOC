@@ -98,10 +98,10 @@ static void	freeBin(void *tree)
 	free(tree);
 }
 
-static struct Type _Add = {mkBin, doAdd, freeBin};
-static struct Type _Sub = { mkBin, doSub, freeBin};
-static struct Type _Mult = { mkBin, doMult, freeBin};
-static struct Type _Div = { mkBin, doDiv, freeBin};
+static struct Type _Add = { mkBin, doAdd, freeBin };
+static struct Type _Sub = { mkBin, doSub, freeBin };
+static struct Type _Mult = { mkBin, doMult, freeBin };
+static struct Type _Div = { mkBin, doDiv, freeBin };
 
 const void  *Add = &_Add;
 const void  *Sub = &_Sub;
