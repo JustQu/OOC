@@ -3,6 +3,9 @@
 
 #include "parse.h"
 #include "binary.h"
+#include "parse.h"
+#include "Var.h"
+#include "value.h"
 
 #include <string.h>
 #include <stdlib.h>

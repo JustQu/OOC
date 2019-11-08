@@ -1,17 +1,10 @@
-#include <stdarg.h>
 #include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
 
 #include "value.h"
+#include "value.r"
 #include "parse.h"
-
-struct Type
-{
-	void	*(*new)(va_list ap);
-	double	(*exec)(const void *tree);
-	void	(*delete)(void *tree);
-};
 
 void	*new(const void *type, ...)
 {
