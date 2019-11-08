@@ -9,6 +9,7 @@
 #include "parse.h"	/* defines NUMBER */
 #include "value.h"
 #include "Name.h"
+#include "Var.h"
 
 #define ALNUM	"ABCDEFGHIJKLMNOPQRSTUVWXYZ"\
 				"abcdefghijklmnopqrstuvwxyz"\

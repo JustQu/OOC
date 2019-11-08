@@ -1,9 +1,8 @@
 #include "Var.h"
-#include "Name.h"
-#include "Name.r"
-#include "value.h"
 #include "value.r"
 #include "parse.h"
+#include "Name.h"
+#include "Name.r"
 
 #include <stdlib.h>
 #include <assert.h>
@@ -39,3 +38,12 @@ static void *mkVar(va_list ap)
 static struct Type _Var = {mkVar, doVar, freeVar};
 
 const void *Var = &_Var;
+
+static double doAssign(const void *tree)
+{
+	return value(left(tree)) = exec(right(tree));
+}
+
+static struct Type _Assign = { mkBin, doAssign, freeBin };
+
+const void *Assign = &_Assign;
