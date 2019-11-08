@@ -177,7 +177,7 @@ int		main(void)
 	while (gets(buf))
 		if (scan(buf))
 		{
-			void	*e = sum();
+			void	*e = stmt();
 
 			if (token)
 				error("trash afer sum");

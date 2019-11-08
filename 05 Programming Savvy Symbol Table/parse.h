@@ -5,7 +5,7 @@ enum tokens
 {
 	NUMBER = 'n',	/* literal constant */
 	VAR = 'v',		/* variable */
-	LET = 'l',	
+	LET = 'l',
 };
 
 void	error(const char *fmt, ...);
